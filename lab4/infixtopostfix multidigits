@@ -1,4 +1,3 @@
-// Online C++ compiler to run C++ program online
 #include <iostream>
 #include<stack>
 using namespace std;
@@ -8,7 +7,38 @@ int getprec(char ch)
     else if (ch == '*' || ch == '/') return 2;
     return 0;
 }
+float evaluatePostfix(string s) {
+    stack<float> st;
 
+    for (int i = 0; i < s.length(); i++) {
+
+        // Skip spaces
+        if (s[i] == ' ') continue;
+        if (isdigit(s[i])) {
+            float num = 0;
+
+            while (i < s.length() && isdigit(s[i])) {
+                num = num * 10.0 + float((s[i] - '0'));
+                i++;
+            }
+
+            st.push(num);
+            i--; 
+        }
+
+        else {
+            float val2 = st.top(); st.pop();
+            float val1 = st.top(); st.pop();
+
+            if (s[i] == '+') st.push(val1 + val2);
+            else if (s[i] == '-') st.push(val1 - val2);
+            else if (s[i] == '*') st.push(val1 * val2);
+            else if (s[i] == '/') st.push(val1 / val2);
+        }
+    }
+
+    return st.top();
+}
 void infixtopostfix(string exp)
 {
     stack<char> st;
@@ -54,10 +84,11 @@ void infixtopostfix(string exp)
     
     
     cout<<res<<endl;
+     cout<<evaluatePostfix(res);
 }
 int main() {
  infixtopostfix("(12+22)/((21+2)*22)");
- 
+
  
 
     return 0;
