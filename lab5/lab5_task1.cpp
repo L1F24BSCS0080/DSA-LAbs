@@ -1,7 +1,7 @@
 #include<iostream>
 #include"Stack.h"
 using namespace std;
-
+//
 int getprec(char ch)
 {
     if (ch == '+' || ch == '-') return 1;
