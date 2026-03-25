@@ -1,7 +1,7 @@
 #include "array.h"
 class Product {
 	int id;
-	string name;
+	string name;//
 	float price;
 	int quantity;
 public:
